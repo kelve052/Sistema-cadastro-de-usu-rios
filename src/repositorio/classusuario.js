@@ -1,14 +1,15 @@
 import dataBaseUsuarios from "../dados.js";
+import bcrypt from 'bcrypt'
 
 class UsuarioClasses {
   listarUsuarios(){
     return dataBaseUsuarios
   }
 
-  criarUsuario(body){
+  criarUsuario(body, hash){
     const id = dataBaseUsuarios.length
-    const {nome, email, senha, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao} = body
-    const newBody = {id, nome, email, senha, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao}
+    const {nome, email, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao} = body
+    const newBody = {id, nome, email, senha: hash, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao}
     dataBaseUsuarios.push(newBody)
   }
   validarCampos (body){
@@ -46,6 +47,15 @@ class UsuarioClasses {
     }
   }
 
+  criarHashSenha(senha){
+    const hash = bcrypt.hashSync(senha, 10)
+    return hash
+  }
+
+  verificarSenhaHash(id, senha){
+
+  }
+
   validarEmail(email){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const emaelValido = emailRegex.test(email);
@@ -60,11 +70,13 @@ class UsuarioClasses {
     }
   }
 
-  atualizarUsuario(id, body){
+  atualizarUsuario(id, body, hash){
     const indexusuario = dataBaseUsuarios.findIndex(usuario => usuario.id == id)
     if(indexusuario == -1){
       throw new Error(`não existe usuario com este id: ${id}!`);
     }
+    body.id = Number(id)
+    body.senha = hash
     dataBaseUsuarios[indexusuario] = body
   }
 }

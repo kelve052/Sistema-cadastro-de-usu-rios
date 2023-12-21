@@ -11,7 +11,8 @@ const postController = (req, res)=>{
     const body = usuario.validarCampos(req.body)
     usuario.validarSenha(body.senha)
     usuario.validarEmail(body.email)
-    usuario.criarUsuario(body)
+    const hash = usuario.criarHashSenha(body.senha)
+    usuario.criarUsuario(body, hash)
     res.status(200).json({msg: "usuario criado com sucesso", usuario: body})
   } catch (error) {
     console.log(error)
@@ -24,8 +25,9 @@ const putController = (req, res)=>{
     const id = req.params.id
     const body = usuario.validarCampos(req.body)
     usuario.validarSenha(body.senha)
+    const hash = usuario.criarHashSenha(body.senha)
     usuario.validarEmail(body.email)
-    usuario.atualizarUsuario(id, body)
+    usuario.atualizarUsuario(id, body, hash)
     res.status(200).json({Msg: "atualização bem sucedida"})
   } catch (error) {
     res.status(400).json({error: error.message})

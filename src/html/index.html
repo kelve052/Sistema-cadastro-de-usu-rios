@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciamento de Usuários</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <header><p>Gerenciamento de Usuários</p></header>
+  <main>
+    <section class="section_botoes">
+      <button class="button_acoes" id="btnListarUsuarios">Listar Usuários</button>
+      <button class="button_acoes" id="btnCadastrarUsuario">Cadastrar usuário</button>
+      <button class="button_acoes" id="btnEditarUsuario">Editar usuário</button>
+      <button class="button_acoes" id="btnExcluirUsuario">Excluir usuário</button>
+      <button class="button_acoes" id="btnFazerLogin">Fazer login</button>
+      <button class="button_acoes" id="btnFazerLogout">Fazer logout</button>
+    </section>
+    <section class="section_informacoes">
+      <div id="div_informacoes_home" class="div_informacoes">
+        <h1>Bem Vindo ao  Gerenciamento de Usuários</h1>
+        <p class="p_escolha_a_acao">Escolha a ação que deseja realizar com os usuários</p>
+        <img class="capa" src="../imgs/capa.png" alt="capa">
+      </div>
+
+      <div id="div_informacoes_cadastrar" class="div_informacoes">
+        <div class="div_p_input">
+          <p>Nome</p>
+          <input type="text">
+        </div>
+        <div class="div_p_input">
+          <p>Email</p>
+          <input type="text">
+        </div>
+        <div class="div_p_input">
+          <p>Senha</p>
+          <input type="text">
+        </div>
+        <div class="div_p_input">
+          <p>Lista de Permissões</p>
+          <input type="text">
+        </div>
+        <div class="div_botao_salvar_cancelar">
+          <button class="botao_salvar">Salvar</button>
+          <button id="btn_cancelar" class="botao_cancelar">Cancelar</button>
+        </div>
+      </div>
+
+      <div id="div_informacoes_editar" class="div_informacoes">
+        <div class="div_p_input">
+          <p>Nome</p>
+          <input type="text">
+        </div>
+        <div class="div_p_input">
+          <p>Email</p>
+          <input type="text">
+        </div>
+        <div class="div_p_input">
+          <p>Senha</p>
+          <input type="text">
+        </div>
+        <div class="div_p_input">
+          <p>Lista de Permissões</p>
+          <input type="text">
+        </div>
+        <div class="div_botao_salvar_cancelar">
+          <button class="botao_salvar">Salvar alterações</button>
+          <button id="btn_cancelar" class="botao_cancelar">Cancelar</button>
+        </div>
+      </div>
+
+      <div id="div_informacoes_listar" class="div_informacoes">
+        <h2 class="h2_usuarios_cadas">Usuários cadastrados:</h2>
+        <div class="bloco_usuario">
+          <p><span>Nome:</span> Kelve</p>
+          <p><span>Email:</span></p>
+          <p><span>Lista de permissões:</span></p>
+          <p><span>Ultima data de Login:</span></p>
+          <p><span>Status de ativação:</span></p>
+        </div>
+      </div>
+        
+      <div id="div_informacoes_excluir" class="div_informacoes">
+        <div class="bloco_usuario">
+          <p><span>Nome:</span> Kelve</p>
+          <p><span>Email:</span></p>
+          <p><span>Lista de permissões:</span></p>
+          <p><span>Ultima data de Login:</span></p>
+          <p><span>Status de ativação:</span></p>
+          <button>Excluir</button>
+        </div>
+      </div>
+      <div id="div_informacoes_login" class="div_informacoes">
+        <div class="div_p_input">
+          <p>Email</p>
+          <input type="text">
+        </div>
+        <div class="div_p_input">
+          <p>Senha</p>
+          <input type="text">
+        </div>
+        <div class="div_botao_salvar_cancelar">
+          <button class="botao_salvar">Entrar</button>
+          <button id="btn_cancelar" class="botao_cancelar">Cancelar</button>
+        </div>
+      </div>
+
+      <div id="div_informacoes_logout" class="div_informacoes">
+        <div class="div_p_input">
+          <p>Email</p>
+          <input type="text">
+        </div>
+        <div class="div_p_input">
+          <p>Senha</p>
+          <input type="text">
+        </div>
+        <div class="div_botao_salvar_cancelar">
+          <button class="botao_salvar button_sair">Sair</button>
+          <button  class="botao_cancelar">Cancelar</button>
+        </div>
+      </div>
+
+    </section>
+  </main>
+</body>
+<script src="../js/functions.js"></script>
+</html>

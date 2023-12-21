@@ -7,7 +7,8 @@ class UsuarioClasses {
   }
 
   criarUsuario(body, hash){
-    const id = dataBaseUsuarios.length
+    const ultimoId = dataBaseUsuarios[dataBaseUsuarios.length-1].id
+    const id = ultimoId + 1
     const {nome, email, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao} = body
     const newBody = {id, nome, email, senha: hash, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao}
     dataBaseUsuarios.push(newBody)
@@ -78,6 +79,14 @@ class UsuarioClasses {
     body.id = Number(id)
     body.senha = hash
     dataBaseUsuarios[indexusuario] = body
+  }
+
+  deletarUsuario(id){
+    const indexusuario = dataBaseUsuarios.findIndex(usuario => usuario.id == id)
+    if(indexusuario == -1){
+      throw new Error(`não existe usuario com este id: ${id}!`);
+    }
+    dataBaseUsuarios.splice(indexusuario, 1)
   }
 }
 

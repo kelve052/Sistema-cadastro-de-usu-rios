@@ -33,4 +33,13 @@ const putController = (req, res)=>{
     res.status(400).json({error: error.message})
   }
 }
-export { getController, postController, putController};
+
+const deleteController = (req, res)=>{
+  try {
+    usuario.deletarUsuario(req.params.id)
+    res.status(201).json()
+  } catch (error) {
+    res.status(400).json({error: error.message})
+  }
+}
+export { getController, postController, putController, deleteController};

@@ -1,5 +1,6 @@
-import dataBaseUsuarios from "../dados.js";
+import { dataBaseUsuarios, registroLogins } from "../dados.js";
 import bcrypt from 'bcrypt'
+import Jwt from "jsonwebtoken";
 
 class UsuarioClasses {
   listarUsuarios(){
@@ -20,7 +21,7 @@ class UsuarioClasses {
     }
     const dataCriacao = new Date().toLocaleDateString()
     const ultimaDataLogin = null
-    const statusAtivacao = null
+    const statusAtivacao = false
     const newBody = {nome, email, senha, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao}
     return newBody;
   }
@@ -53,8 +54,18 @@ class UsuarioClasses {
     return hash
   }
 
-  verificarSenhaHash(id, senha){
-
+  // busca usuario pelo email, e verifica se a {senha: hash} do usuario correspode a senha inserida
+  async verificarSenhaHash(email, senha){
+    const usuario = dataBaseUsuarios.find(usuario => usuario.email === email)
+    if(!usuario){
+      throw new Error(`nenhum usuario esncontrado com este email: ${email}`)
+    }
+    const hashSenha = usuario.senha
+    const senhaValida = await bcrypt.compare(senha, hashSenha);
+    if(!senhaValida){
+      throw new Error(`senha invalida!`)
+    }
+    return usuario;  
   }
 
   validarEmail(email){
@@ -87,6 +98,32 @@ class UsuarioClasses {
       throw new Error(`não existe usuario com este id: ${id}!`);
     }
     dataBaseUsuarios.splice(indexusuario, 1)
+  }
+  listarRegistroLogins(){
+    return registroLogins
+  }
+
+  verificarEmailInLogin(email){ // verifica se usuario já esta logado
+    const emailLogin = registroLogins.find(registro => registro.email === email)
+    if(emailLogin){
+      throw new Error(`O usuario do email: ${email} ja esta cadastrado!`);
+    }
+  }
+  login(usuarioLogin){
+    const indexUsuario = dataBaseUsuarios.findIndex(usuario => usuario.id === usuarioLogin.id)
+    dataBaseUsuarios[indexUsuario].ultimaDataLogin = new Date().toLocaleTimeString
+    dataBaseUsuarios[indexUsuario].statusAtivacao = true
+    const token = Jwt.sign(usuarioLogin, "HH42", {expiresIn: '1h'});
+    const {email} = usuarioLogin
+    const newUsuarioLogin = {email, token: token}
+    registroLogins.push(newUsuarioLogin)
+  }
+
+  logout(usuarioLogout){
+    const indexUsuario = dataBaseUsuarios.findIndex(usuario => usuario.id === usuarioLogout.id)
+    const indexRegistro = registroLogins.findIndex(registro => registro.email === usuarioLogout.email)
+    dataBaseUsuarios[indexUsuario].statusAtivacao = false
+    registroLogins.splice(indexRegistro, 1)
   }
 }
 

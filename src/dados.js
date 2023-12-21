@@ -11,4 +11,6 @@ const dataBaseUsuarios = [
   }
 ]
 
-export default dataBaseUsuarios;
+const registroLogins = []
+
+export {dataBaseUsuarios, registroLogins} ;

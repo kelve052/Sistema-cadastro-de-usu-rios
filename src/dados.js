@@ -1,12 +1,13 @@
 const dataBaseUsuarios = [
   {
-    Nome: "Teste",
+    id: 0,
+    nome: "Teste",
     email: "teste@gmail.com",
-    Senha: "Teste123#",
-    listaDePermissões: "teste lista de permições",
-    dataCricao: "05/12/2012",
+    senha: "Teste123#",
+    listaDePermissoes: "teste lista de permições",
+    dataCriacao: "05/12/2012",
     ultimaDataLogin: "05/12/2023",
-    statusAtivação: false
+    statusAtivacao: false
   }
 ]
 

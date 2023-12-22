@@ -26,7 +26,7 @@ const putController = (req, res)=>{
     const body = usuario.validarCampos(req.body)
     usuario.validarSenha(body.senha)
     const hash = usuario.criarHashSenha(body.senha)
-    usuario.validarEmail(body.email)
+    usuario.validarEmail(body.email, id)
     usuario.atualizarUsuario(id, body, hash)
     res.status(200).json({Msg: "atualização bem sucedida"})
   } catch (error) {

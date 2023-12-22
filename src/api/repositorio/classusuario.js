@@ -68,17 +68,19 @@ class UsuarioClasses {
     return usuario;  
   }
 
-  validarEmail(email){
+  validarEmail(email, id = null){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const emaelValido = emailRegex.test(email);
+    const emailValido = emailRegex.test(email);
     
-    if(!emaelValido){
-      throw new Error("email inserido não é valido");
+    if (!emailValido) {
+      throw new Error("O e-mail inserido não é válido");
     }
-    // ferifica se email já existe
-    const emailExistente = dataBaseUsuarios.some(usuario => usuario.email === email);
-    if(emailExistente){
-      throw new Error("email inserido já pertence a um usuário!");
+  
+    // Verifica se o e-mail já existe para outro usuário
+    const emailExistente = dataBaseUsuarios.some(usuario => usuario.email === email && usuario.id != id);
+  
+    if (emailExistente) {
+      throw new Error("O e-mail inserido já pertence a outro usuário!");
     }
   }
 

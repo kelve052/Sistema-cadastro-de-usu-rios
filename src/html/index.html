@@ -11,7 +11,7 @@
   <header><p>Gerenciamento de Usuários</p></header>
   <main>
     <section class="section_botoes">
-      <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnListarUsuarios">Listar Usuários</button>
+      <button onclick="econderCaixaMensagem(), listarUsuarios()" class="button_acoes" id="btnListarUsuarios">Listar Usuários</button>
       <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnCadastrarUsuario">Cadastrar usuário</button>
       <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnEditarUsuario">Editar usuário</button>
       <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnExcluirUsuario">Excluir usuário</button>
@@ -76,11 +76,11 @@
       <div id="div_informacoes_listar" class="div_informacoes">
         <h2 class="h2_usuarios_cadas">Usuários cadastrados:</h2>
         <div class="bloco_usuario">
-          <p><span>Nome:</span> Kelve</p>
-          <p><span>Email:</span></p>
-          <p><span>Lista de permissões:</span></p>
-          <p><span>Ultima data de Login:</span></p>
-          <p><span>Status de ativação:</span></p>
+          <p id="p_listar_nome"><span>Nome:</span> Kelve</p>
+          <p id="p_listar_email"><span>Email:</span></p>
+          <p id="p_listar_permissoes"><span>Lista de permissões:</span></p>
+          <p id="p_listar_ultimaDataLogin"><span>Ultima data de Login:</span></p>
+          <p id="p_listar_statusAtivacao"><span>Status de ativação:</span></p>
         </div>
       </div>
         

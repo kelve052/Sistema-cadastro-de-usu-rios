@@ -14,7 +14,7 @@
       <button onclick="econderCaixaMensagem(), listarUsuarios()" class="button_acoes" id="btnListarUsuarios">Listar Usuários</button>
       <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnCadastrarUsuario">Cadastrar usuário</button>
       <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnEditarUsuario">Editar usuário</button>
-      <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnExcluirUsuario">Excluir usuário</button>
+      <button onclick="econderCaixaMensagem(), botaoEscluirGerarLista()" class="button_acoes" id="btnExcluirUsuario">Excluir usuário</button>
       <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnFazerLogin">Fazer login</button>
       <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnFazerLogout">Fazer logout</button>
     </section>
@@ -42,85 +42,99 @@
           <p>Lista de Permissões</p>
           <input type="text" name="permissoes">
         </div>
-        <p id="messagem_erro"></p>
+        <p id="messagem_erro" class="messagem_erro"></p>
         <div class="div_botao_salvar_cancelar">
           <button onclick="cadastrar()" class="botao_salvar">Salvar</button>
           <button id="btn_cancelar" class="botao_cancelar">Cancelar</button>
         </div>
-        <div id="div_messagem_sucesso" class="div_mensagem_sucesso"><p>Usuário salvo com sucesso!</p><img src="../imgs/icone_sucesso.png"></div>
+        <div id="div_messagem_sucesso" class="div_messagem_sucesso">
+          <p>Usuário salvo com sucesso!</p>
+          <img src="../imgs/icone_sucesso.png">
+          <button onclick="econderCaixaMensagem()" class="button_ok_card">Ok</button>
+        </div>
       </div>
 
       <div id="div_informacoes_editar" class="div_informacoes">
         <div class="div_p_input">
+          <p>ID</p>
+          <input name="id" type="text">
+        </div>
+        <div class="div_p_input">
           <p>Nome</p>
-          <input type="text">
+          <input name="nome" type="text">
         </div>
         <div class="div_p_input">
           <p>Email</p>
-          <input type="text">
+          <input name="email" type="text">
         </div>
         <div class="div_p_input">
           <p>Senha</p>
-          <input type="text">
+          <input name="senha" type="text">
         </div>
         <div class="div_p_input">
           <p>Lista de Permissões</p>
-          <input type="text">
+          <input name="permissoes" type="text">
         </div>
+        <p id="messagem_erro_editar" class="messagem_erro"></p>
         <div class="div_botao_salvar_cancelar">
-          <button class="botao_salvar">Salvar alterações</button>
+          <button onclick="editarUsuario()" class="botao_salvar">Salvar alterações</button>
           <button id="btn_cancelar" class="botao_cancelar">Cancelar</button>
+        </div>
+        <div id="div_messagem_sucesso_editar" class="div_messagem_sucesso">
+          <p>Usuário editado com sucesso!</p>
+          <img src="../imgs/icone_sucesso.png">
+          <button onclick="econderCaixaMensagem()" class="button_ok_card">Ok</button>
         </div>
       </div>
 
       <div id="div_informacoes_listar" class="div_informacoes">
-        <h2 class="h2_usuarios_cadas">Usuários cadastrados:</h2>
-        <div class="bloco_usuario">
-          <p id="p_listar_nome"><span>Nome:</span> Kelve</p>
-          <p id="p_listar_email"><span>Email:</span></p>
-          <p id="p_listar_permissoes"><span>Lista de permissões:</span></p>
-          <p id="p_listar_ultimaDataLogin"><span>Ultima data de Login:</span></p>
-          <p id="p_listar_statusAtivacao"><span>Status de ativação:</span></p>
-        </div>
+        
       </div>
         
       <div id="div_informacoes_excluir" class="div_informacoes">
-        <div class="bloco_usuario">
-          <p><span>Nome:</span> Kelve</p>
-          <p><span>Email:</span></p>
-          <p><span>Lista de permissões:</span></p>
-          <p><span>Ultima data de Login:</span></p>
-          <p><span>Status de ativação:</span></p>
-          <button>Excluir</button>
-        </div>
+        
       </div>
       <div id="div_informacoes_login" class="div_informacoes">
         <div class="div_p_input">
           <p>Email</p>
-          <input type="text">
+          <input type="text" name="email">
         </div>
         <div class="div_p_input">
           <p>Senha</p>
-          <input type="text">
+          <input type="text" name="senha">
         </div>
+        <p id="messagem_erro_login" class="messagem_erro"></p>
         <div class="div_botao_salvar_cancelar">
-          <button class="botao_salvar">Entrar</button>
+          <button onclick="login()" class="botao_salvar">Entrar</button>
           <button id="btn_cancelar" class="botao_cancelar">Cancelar</button>
+        </div>
+        <div class="div_messagem_sucesso" id="card_login_bem_sucedido">
+          <p id="p_login_bem_sucedido">Login bem sucedido!</p>
+          <p id="ps_card_login_email">Email:<span id="ps_card_login_email_span"></span></p>
+          <p id="ps_card_login_token">Token:<span id="ps_card_login_token_span"></span></p>
+          <img src="../imgs/icone_sucesso.png" alt="icone">
+          <button onclick="econderCaixaMensagem()" class="button_ok_card">Ok</button>
         </div>
       </div>
 
       <div id="div_informacoes_logout" class="div_informacoes">
         <div class="div_p_input">
           <p>Email</p>
-          <input type="text">
+          <input type="text" name="email">
         </div>
         <div class="div_p_input">
           <p>Senha</p>
-          <input type="text">
+          <input type="text" name="senha">
         </div>
+        <p id="messagem_erro_logout" class="messagem_erro"></p>
         <div class="div_botao_salvar_cancelar">
-          <button class="botao_salvar button_sair">Sair</button>
+          <button onclick="logout()" class="botao_salvar button_sair">Sair</button>
           <button  class="botao_cancelar">Cancelar</button>
+        </div>
+        <div class="div_messagem_sucesso" id="card_logout_bem_sucedido">
+          <p id="p_logout_bem_sucedido">Usuário saio da seção com sucesso!</p>
+          <img src="../imgs/icone_sucesso.png" alt="icone">
+          <button onclick="econderCaixaMensagem()" class="button_ok_card">Ok</button>
         </div>
       </div>
     </section>

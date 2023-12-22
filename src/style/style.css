@@ -124,7 +124,7 @@ h1{
   background: #D9D9D9;
   border: none;
 }
-#messagem_erro{
+.messagem_erro{
   color: #970B0B;
   font-family: Quicksand;
   font-size: 20px;
@@ -167,7 +167,8 @@ h1{
   font-weight: 500;
   line-height: normal;
 }
-/* div_informacoes_editar */
+
+/* div_informacoes_editar---------------------------------------------------------------------------------------- */
 #div_informacoes_editar{
   padding: 48px;
   
@@ -187,7 +188,7 @@ h1{
   font-weight: 500;
   line-height: normal;
 }
-#div_messagem_sucesso{
+.div_messagem_sucesso{
   width: 553px;
   height: 237px;
   border-radius: 10px;
@@ -195,13 +196,14 @@ h1{
   box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.25);
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
   transform: translate(-50%, -100%);
   position: relative;
 }
-#div_messagem_sucesso P{
+.div_messagem_sucesso P{
   color: #0097D8;
   font-family: Quicksand;
   font-size: 28px;
@@ -209,7 +211,7 @@ h1{
   font-weight: 700;
   line-height: normal;
 }
-#div_messagem_sucesso img{
+.div_messagem_sucesso img{
   width: 335px;
   height: 335px;
 
@@ -218,7 +220,7 @@ h1{
   right: -150px;
 }
 
-/* div_informacoes_listar */
+/* div_informacoes_listar -----------------------------------------------------------------------*/
 #div_informacoes_listar{
   padding: 40px;
 }
@@ -257,12 +259,13 @@ h1{
   line-height: normal;
 }
 
-/* div_informacoes_excluir */
+/* div_informacoes_excluir -----------------------------------------------------------*/
 #div_informacoes_excluir{
   
  /* css igual ao de listar  */
-  padding: 24px 0;
+  padding: 24px;
 }
+
 #div_informacoes_excluir button{
   width: 200px;
   height: 53px;
@@ -281,21 +284,136 @@ h1{
   font-weight: 500;
   line-height: normal;
 }
+#messagem_erro_excluir{
+  color: #970B0B;
+  font-family: Quicksand;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+}
+#blocoExcluir_card{
+  width: 553px;
+  height: 237px;
+  border-radius: 10px;
+  background-color: #FFF;
+  box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.25);
 
-/* div_informacoes_login */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: translate(-50%, -100%);
+  position: relative;
+}
+#blocoExcluir_card p{
+  width: 500px;
+  color: #D8C200;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+#blocoExcluir_card img{
+  width: 335px;
+  height: 335px;
+
+  position: absolute;
+  top: -140px;
+  right: -150px;
+}
+/* div_informacoes_login -------------------------------------------------------------------------*/
 #div_informacoes_login{
   /* css igual a cadastrar */
   padding: 48px;
   
 }
+#card_login_bem_sucedido{
+  width: 771px;
+  min-height: 250px;
+  border-radius: 10px;
+  background-color: #FFF;
+  padding: 20px;
+  position: absolute;
+  transform: translate(-50%, -100%);
+  position: relative;
+}
+#card_login_bem_sucedido #p_login_bem_sucedido{
+  color: #D8C200;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 22px;
+}
+#card_login_bem_sucedido #ps_card_login_email{
+  text-align: left;
+  color: #000;
+  font-family: Quicksand;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+#card_login_bem_sucedido #ps_card_login_token{
+  text-align: left;
+  color: #000;
+  font-family: Quicksand;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+#ps_card_login_token_span{
+  width: 750px;
+  word-wrap: break-word;
+  display: inline-block;
+  color: #000;
+  font-family: Quicksand;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+#ps_card_login_email_span{
+  color: #000;
+  font-family: Quicksand;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+#card_login_bem_sucedido img{
+  width: 335px;
+  height: 335px;
 
-/* div_informacoes_logout */
+  position: absolute;
+  top: -140px;
+  right: -150px;
+}
+.button_ok_card{
+  margin-top: 16px;
+  width: 120px;
+  height: 40px;
+  background-color: #0097D8;
+  border: none;
+  border-radius: 10px;
+}
+/* div_informacoes_logout ---------------------------------------------------------------------------------*/
 #div_informacoes_logout{
    /* css igual a cadastrar */
    padding: 48px;
 }
 #div_informacoes_logout .button_sair{
   background-color: #970B0B;
+}
+#p_logout_bem_sucedido{
+  padding-top: 80px;
 }
 
 button{

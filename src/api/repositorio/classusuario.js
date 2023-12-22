@@ -8,7 +8,7 @@ class UsuarioClasses {
   }
 
   criarUsuario(body, hash){
-    const ultimoId = dataBaseUsuarios[dataBaseUsuarios.length-1].id
+    const ultimoId = dataBaseUsuarios.length > 0 ? dataBaseUsuarios[dataBaseUsuarios.length - 1].id : 0;
     const id = ultimoId + 1
     const {nome, email, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao} = body
     const newBody = {id, nome, email, senha: hash, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao}
@@ -108,7 +108,7 @@ class UsuarioClasses {
   verificarEmailInLogin(email){ // verifica se usuario já esta logado
     const emailLogin = registroLogins.find(registro => registro.email === email)
     if(emailLogin){
-      throw new Error(`O usuario do email: ${email} ja esta cadastrado!`);
+      throw new Error(`O usuario do email: ${email} ja esta logado!`);
     }
   }
   login(usuarioLogin){
@@ -119,9 +119,16 @@ class UsuarioClasses {
     const {email} = usuarioLogin
     const newUsuarioLogin = {email, token: token}
     registroLogins.push(newUsuarioLogin)
+    return newUsuarioLogin
   }
 
   logout(usuarioLogout){
+    //frerifica se usuario está logado
+    const usuarioLogado = registroLogins.find(usuario => usuario.email == usuarioLogout.email)
+    if(!usuarioLogado){
+      throw new Error('Usuário não está logado')
+    }
+
     const indexUsuario = dataBaseUsuarios.findIndex(usuario => usuario.id === usuarioLogout.id)
     const indexRegistro = registroLogins.findIndex(registro => registro.email === usuarioLogout.email)
     dataBaseUsuarios[indexUsuario].statusAtivacao = false

@@ -15,7 +15,6 @@ const postController = (req, res)=>{
     usuario.criarUsuario(body, hash)
     res.status(200).json({msg: "usuario criado com sucesso", usuario: body})
   } catch (error) {
-    console.log(error)
     res.status(400).json({error: error.message})
   }
 }
@@ -60,8 +59,8 @@ const login = async (req, res)=>{
     }
     usuario.verificarEmailInLogin(email) //verfica se ja esta logado
     const usuarioLogin = await usuario.verificarSenhaHash(email, senha) //valida email e senha e retorna usuario
-    usuario.login(usuarioLogin)
-    res.status(200).json({msg: "login realizado com sucesso!"})
+    const usuarioLogado = usuario.login(usuarioLogin)
+    res.status(200).json({Msg: 'Login realizado com sucesso!',usuario: usuarioLogado})
   } catch (error) {
     res.status(400).json({error: error.message})
   }

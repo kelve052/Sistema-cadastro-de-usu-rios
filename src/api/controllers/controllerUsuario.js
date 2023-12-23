@@ -1,6 +1,6 @@
-import UsuarioClasses from "../repositorio/classusuario.js"
+import UsuarioClasse from "../repositorio/classUsuario.js"
 
-const usuario = new UsuarioClasses()
+const usuario = new UsuarioClasse()
 
 const getController = (req, res)=>{
   res.status(200).json({usuarios: usuario.listarUsuarios()})

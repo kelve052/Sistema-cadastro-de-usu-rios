@@ -2,7 +2,7 @@ import { dataBaseUsuarios, registroLogins, registroUsuariosAtivo } from "../dado
 import bcrypt from 'bcrypt'
 import Jwt from "jsonwebtoken";
 
-class UsuarioClasses {
+class UsuarioClasse {
   listarUsuarios(){
     return dataBaseUsuarios
   }
@@ -77,6 +77,8 @@ class UsuarioClasses {
   }
 
   validarEmail(email, id = null){
+    //id null no caso de edição, recebe o id para verificar se o email não pertence a ele mesmo
+    // no caso de criaçao fica como null e na edição recebe o id
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const emailValido = emailRegex.test(email);
     
@@ -86,7 +88,7 @@ class UsuarioClasses {
   
     // Verifica se o e-mail já existe para outro usuário
     const emailExistente = dataBaseUsuarios.some(usuario => usuario.email === email && usuario.id != id);
-  
+
     if (emailExistente) {
       throw new Error("O e-mail inserido já pertence a outro usuário!");
     }
@@ -103,7 +105,7 @@ class UsuarioClasses {
     body.ultimaDataLogin = dataBaseUsuarios[indexusuario].ultimaDataLogin
     body.statusAtivacao = dataBaseUsuarios[indexusuario].statusAtivacao
 
-    dataBaseUsuarios[indexusuario] = body
+    return dataBaseUsuarios[indexusuario] = body
   }
 
   deletarUsuario(id){
@@ -178,4 +180,4 @@ class UsuarioClasses {
   }
 }
 
-export default UsuarioClasses
+export default UsuarioClasse

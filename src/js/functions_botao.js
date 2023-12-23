@@ -1,4 +1,4 @@
-//funções que manipulão as ações dos botões de troca de ações
+//funções que manipulão as ações dos botões de troca de telas
 
 function hideAllSections() {
   const sections = document.querySelectorAll('.div_informacoes');

@@ -3,6 +3,26 @@
 ## Descrição
 Este sistema oferece funcionalidades para gerenciamento de usuários, incluindo operações como listar, cadastrar, atualizar e excluir usuários. Além disso, também oferece recursos de login, logout e ativação/desativação de usuários.
 
+## Instalação
+
+```bash
+git clone https://github.com/kelve052/Sistema-gerenciamento-usuario.git
+cd Sistema-gerenciamento-usuario
+npm install
+npm start
+```
+
+# Front-end
+abra o arquivo `html/index.html` no navegador para interagir com a interface do usuário.
+
+## Testes
+
+Para executar os testes, utilize o seguinte comando:
+
+```bash
+npm test
+```
+
 ## Rotas
 
 ### Listar Usuários
@@ -47,22 +67,3 @@ Este sistema oferece funcionalidades para gerenciamento de usuários, incluindo 
 
 *Observação: Substitua `:id` na URL pelas informações específicas do usuário.*
 
-## Instalação
-
-```bash
-git clone https://github.com/kelve052/Sistema-gerenciamento-usuario.git
-cd Sistema-gerenciamento-usuario
-npm install
-npm start
-```
-
-# Front-end
-Acesse o arquivo `html/index.html` no navegador para interagir com a interface do usuário.
-
-## Testes
-
-Para executar os testes, utilize o seguinte comando:
-
-```bash
-npm test
-```

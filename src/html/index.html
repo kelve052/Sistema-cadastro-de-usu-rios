@@ -17,6 +17,8 @@
       <button onclick="econderCaixaMensagem(), botaoEscluirGerarLista()" class="button_acoes" id="btnExcluirUsuario">Excluir usuário</button>
       <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnFazerLogin">Fazer login</button>
       <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnFazerLogout">Fazer logout</button>
+      <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnAtivar">Ativar Usuário</button>
+      <button onclick="econderCaixaMensagem()" class="button_acoes" id="btnDesativar">Desativar Usuário</button>
     </section>
     <section class="section_informacoes">
       <div id="div_informacoes_home" class="div_informacoes">
@@ -133,6 +135,47 @@
         </div>
         <div class="div_messagem_sucesso" id="card_logout_bem_sucedido">
           <p id="p_logout_bem_sucedido">Usuário saio da seção com sucesso!</p>
+          <img src="../imgs/icone_sucesso.png" alt="icone">
+          <button onclick="econderCaixaMensagem()" class="button_ok_card">Ok</button>
+        </div>
+      </div>
+
+      <div id="div_informacoes_ativar" class="div_informacoes">
+        <div class="div_p_input">
+          <p>Email</p>
+          <input type="text" name="email">
+        </div>
+        <div class="div_p_input">
+          <p>Senha</p>
+          <input type="text" name="senha">
+        </div>
+        <p id="messagem_erro_ativar" class="messagem_erro"></p>
+        <div class="div_botao_salvar_cancelar">
+          <button onclick="ativarUsuario()" class="botao_salvar button_sair">Ativar</button>
+          <button  class="botao_cancelar">Cancelar</button>
+        </div>
+        <div class="div_messagem_sucesso" id="card_ativar_bem_sucedido">
+          <p id="p_ativar_bem_sucedido">Usuário foi Ativado com sucesso!</p>
+          <img src="../imgs/icone_sucesso.png" alt="icone">
+          <button onclick="econderCaixaMensagem()" class="button_ok_card">Ok</button>
+        </div>
+      </div>
+      <div id="div_informacoes_desativar" class="div_informacoes">
+        <div class="div_p_input">
+          <p>Email</p>
+          <input type="text" name="email">
+        </div>
+        <div class="div_p_input">
+          <p>Senha</p>
+          <input type="text" name="senha">
+        </div>
+        <p id="messagem_erro_desativar" class="messagem_erro"></p>
+        <div class="div_botao_salvar_cancelar">
+          <button onclick="desativarUsuario()" class="botao_salvar button_sair">Desativar</button>
+          <button  class="botao_cancelar">Cancelar</button>
+        </div>
+        <div class="div_messagem_sucesso" id="card_desativar_bem_sucedido">
+          <p id="p_desativar_bem_sucedido">Usuário Foi desativado!</p>
           <img src="../imgs/icone_sucesso.png" alt="icone">
           <button onclick="econderCaixaMensagem()" class="button_ok_card">Ok</button>
         </div>

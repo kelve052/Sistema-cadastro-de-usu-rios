@@ -40,13 +40,22 @@ document.getElementById('btnFazerLogout').addEventListener('click', function() {
   document.getElementById('div_informacoes_logout').style.display = 'block';
 });
 
+document.getElementById('btnAtivar').addEventListener('click', function() {
+  hideAllSections();
+  document.getElementById('div_informacoes_ativar').style.display = 'block';
+});
+
+document.getElementById('btnDesativar').addEventListener('click', function() {
+  hideAllSections();
+  document.getElementById('div_informacoes_desativar').style.display = 'block';
+});
+
 for (const btnCancelar of document.getElementsByClassName('botao_cancelar')) {
   btnCancelar.addEventListener('click', function() {
     hideAllSections();
     document.getElementById('div_informacoes_home').style.display = 'block';
   });
 }
-// fim das funções que manipulão as ações dos botões de troca de ações
 
 
 

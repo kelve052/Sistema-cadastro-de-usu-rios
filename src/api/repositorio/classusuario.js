@@ -1,4 +1,4 @@
-import { dataBaseUsuarios, registroLogins } from "../dados.js";
+import { dataBaseUsuarios, registroLogins, registroUsuariosAtivo } from "../dados.js";
 import bcrypt from 'bcrypt'
 import Jwt from "jsonwebtoken";
 
@@ -14,17 +14,25 @@ class UsuarioClasses {
     const newBody = {id, nome, email, senha: hash, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao}
     dataBaseUsuarios.push(newBody)
   }
-  validarCampos (body){
-    const {nome, email, senha, listaDePermissoes} = body
-    if(!nome || !email || !senha || !listaDePermissoes){
-      throw new Error("propiedades no corpor faltando! propriedades necessárias: nome, email, senha, listaDePermissoes")
+  validarCampos(body, newCampos = true) {
+    const { nome, email, senha, listaDePermissoes } = body;
+  
+    if (!nome || !email || !senha || !listaDePermissoes) {
+      throw new Error("Propriedades no corpo faltando! Propriedades necessárias: nome, email, senha, listaDePermissoes");
     }
-    const dataCriacao = new Date().toLocaleDateString()
-    const ultimaDataLogin = null
-    const statusAtivacao = false
-    const newBody = {nome, email, senha, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao}
-    return newBody;
+  
+    if (newCampos) {
+      // Caso for uma edição de usuário, não resetar os campos!
+      const dataCriacao = new Date().toLocaleDateString();
+      const ultimaDataLogin = null;
+      const statusAtivacao = false;
+  
+      return { nome, email, senha, listaDePermissoes, dataCriacao, ultimaDataLogin, statusAtivacao };
+    }
+
+    return { nome, email, senha, listaDePermissoes };
   }
+
   validarSenha(senha){
     if (senha.length < 8) {
       throw new Error("A senha deve ter no mínimo 8 caracteres!");
@@ -65,7 +73,7 @@ class UsuarioClasses {
     if(!senhaValida){
       throw new Error(`senha invalida!`)
     }
-    return usuario;  
+    return usuario;
   }
 
   validarEmail(email, id = null){
@@ -91,6 +99,10 @@ class UsuarioClasses {
     }
     body.id = Number(id)
     body.senha = hash
+    body.dataCriacao = dataBaseUsuarios[indexusuario].dataCriacao
+    body.ultimaDataLogin = dataBaseUsuarios[indexusuario].ultimaDataLogin
+    body.statusAtivacao = dataBaseUsuarios[indexusuario].statusAtivacao
+
     dataBaseUsuarios[indexusuario] = body
   }
 
@@ -99,7 +111,7 @@ class UsuarioClasses {
     if(indexusuario == -1){
       throw new Error(`não existe usuario com este id: ${id}!`);
     }
-    dataBaseUsuarios.splice(indexusuario, 1)
+    return dataBaseUsuarios.splice(indexusuario, 1)[0]
   }
   listarRegistroLogins(){
     return registroLogins
@@ -112,10 +124,9 @@ class UsuarioClasses {
     }
   }
   login(usuarioLogin){
-    const indexUsuario = dataBaseUsuarios.findIndex(usuario => usuario.id === usuarioLogin.id)
-    dataBaseUsuarios[indexUsuario].ultimaDataLogin = new Date().toLocaleTimeString
-    dataBaseUsuarios[indexUsuario].statusAtivacao = true
-    const token = Jwt.sign(usuarioLogin, "HH42", {expiresIn: '1h'});
+    const indexUsuario = dataBaseUsuarios.findIndex(usuario => usuario.id == usuarioLogin.id)
+    dataBaseUsuarios[indexUsuario].ultimaDataLogin = new Date().toLocaleDateString()
+    const token = Jwt.sign(usuarioLogin, "HH12", {expiresIn: '1h'});
     const {email} = usuarioLogin
     const newUsuarioLogin = {email, token: token}
     registroLogins.push(newUsuarioLogin)
@@ -129,10 +140,41 @@ class UsuarioClasses {
       throw new Error('Usuário não está logado')
     }
 
-    const indexUsuario = dataBaseUsuarios.findIndex(usuario => usuario.id === usuarioLogout.id)
     const indexRegistro = registroLogins.findIndex(registro => registro.email === usuarioLogout.email)
-    dataBaseUsuarios[indexUsuario].statusAtivacao = false
     registroLogins.splice(indexRegistro, 1)
+  }
+
+  verificarEmailInAtivado(email){ // verifica se usuario já esta logado
+    const emailAtivo = registroUsuariosAtivo.find(registro => registro.email == email)
+    console.log(emailAtivo)
+    if(emailAtivo){
+      throw new Error(`O usuario do email: ${email} ja está ativo!`);
+    }
+  }
+
+  ativarUsuario(usuarioAtivar){
+    const indexUsuario = dataBaseUsuarios.findIndex(usuario => usuario.id == usuarioAtivar.id)
+    dataBaseUsuarios[indexUsuario].statusAtivacao = true
+    const {email, senha} = usuarioAtivar
+    const body = {email, senha}
+    registroUsuariosAtivo.push(body)
+  }
+
+  desativarUsuario(usuarioAtivar){
+    //frerifica se usuario está ativo
+    const usuarioLogado = registroUsuariosAtivo.find(usuario => usuario.email == usuarioAtivar.email)
+    if(!usuarioLogado){
+      throw new Error('Usuário não está Ativo')
+    }
+    
+    const indexUsuario = dataBaseUsuarios.findIndex(usuario => usuario.id == usuarioAtivar.id)
+    try {
+      dataBaseUsuarios[indexUsuario].statusAtivacao = false
+    } catch (error) {
+      // no caso de usuario for deletado, ignora o erro de não encontrar statusAtivacao
+    }
+    const indexRegistrosAtivo = registroUsuariosAtivo.findIndex(registro => registro.email == usuarioAtivar.email)
+    registroUsuariosAtivo.splice(indexRegistrosAtivo, 1)
   }
 }
 

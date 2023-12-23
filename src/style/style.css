@@ -40,11 +40,11 @@ main{
 .button_acoes{
   margin: 0 auto;
   margin-bottom: 8px;
-  width: 366px;
-  height: 73px;
+  width: 300px;
+  height: 50px;
   border-radius: 10px;
-  background: #60B940;
-  border: none;
+  background: #0097D8;
+  border: 1px springgreen solid;
   display: block;
 
   color: #FFF;
@@ -66,7 +66,6 @@ main{
 
 /* div_informacoes_home */
 #div_informacoes_home{
-  
   padding-bottom: 36px;
 }
 h1{
@@ -79,8 +78,8 @@ h1{
   font-weight: 600;
   line-height: normal;
 
-  margin: 100px auto;
-  margin-bottom: 50px;
+  margin: 0 auto;
+  margin-top: 36px;
 }
 .p_escolha_a_acao{
   color: #CC9F00;
@@ -200,7 +199,7 @@ h1{
   justify-content: center;
   align-items: center;
   position: absolute;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -150%);
   position: relative;
 }
 .div_messagem_sucesso P{
@@ -413,6 +412,22 @@ h1{
   background-color: #970B0B;
 }
 #p_logout_bem_sucedido{
+  padding-top: 80px;
+}
+
+/* div_informacoes_ativar ---------------------------------------------------------------------------------*/
+#div_informacoes_ativar {
+  padding: 40px;
+}
+#p_ativar_bem_sucedido{
+  padding-top: 80px;
+}
+
+/* div_informacoes_desativar ------------------------------------------------------------------------------*/
+#div_informacoes_desativar{
+  padding: 40px;
+}
+#p_desativar_bem_sucedido{
   padding-top: 80px;
 }
 

@@ -104,6 +104,7 @@ function editarUsuario (){
     if(!data.error){//operação bem sucedida
       document.getElementById('div_messagem_sucesso_editar').style.display = 'flex'
       document.getElementById('overlay').style.display = 'block';
+      document.getElementById('messagem_erro_editar').innerText = ''
     }else{//operaçao retornou um erro
       document.getElementById('messagem_erro_editar').innerText = data.error
     }
@@ -179,6 +180,7 @@ function login(){
       document.getElementById('ps_card_login_email_span').innerText = data.usuario.email
       document.getElementById('ps_card_login_token_span').innerText = data.usuario.token
       document.getElementById('overlay').style.display = 'block';
+      document.getElementById('messagem_erro_login').innerText = ''
     }else{
       document.getElementById('messagem_erro_login').innerText = data.error
     }
@@ -209,8 +211,70 @@ function logout(){
     if(!data.error){
       document.getElementById('card_logout_bem_sucedido').style.display = 'block'
       document.getElementById('overlay').style.display = 'block';
+      document.getElementById('messagem_erro_logout').innerText = ''
     }else{
       document.getElementById('messagem_erro_logout').innerText = data.error
+    }
+  })
+}
+
+function ativarUsuario(){
+  const email = document.querySelector('#div_informacoes_ativar input[name="email"]').value;
+  const senha = document.querySelector('#div_informacoes_ativar input[name="senha"]').value;
+
+  const usuario = {
+    email: email,
+    senha: senha
+  }
+
+  fetch('http://localhost:3000/ativar', {
+    method: 'POST',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify(usuario)
+  })
+  .then(response =>{
+    if(!response.ok){
+      console.log(`HTTP error! Status: ${response.status}`)
+    }
+    return response.json()
+  })
+  .then(data => {
+    if(!data.error){
+      document.getElementById('card_ativar_bem_sucedido').style.display = 'block'
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('messagem_erro_ativar').innerText = ''
+    }else{
+      document.getElementById('messagem_erro_ativar').innerText = data.error
+    }
+  })
+}
+function desativarUsuario(){
+  const email = document.querySelector('#div_informacoes_desativar input[name="email"]').value;
+  const senha = document.querySelector('#div_informacoes_desativar input[name="senha"]').value;
+
+  const usuario = {
+    email: email,
+    senha: senha
+  }
+
+  fetch('http://localhost:3000/desativar', {
+    method: 'DELETE',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify(usuario)
+  })
+  .then(response =>{
+    if(!response.ok){
+      console.log(`HTTP error! Status: ${response.status}`)
+    }
+    return response.json()
+  })
+  .then(data => {
+    if(!data.error){
+      document.getElementById('card_desativar_bem_sucedido').style.display = 'block'
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('messagem_erro_desativar').innerText = ''
+    }else{
+      document.getElementById('messagem_erro_desativar').innerText = data.error
     }
   })
 }
@@ -237,6 +301,7 @@ function criarBlocosUsuarios(dataUsuarios, idElement , botao=null) {
     const idElemento = criarElementoUsuario('ID', usuario.id);
     const nomeElemento = criarElementoUsuario('Nome', usuario.nome);
     const emailElemento = criarElementoUsuario('Email', usuario.email);
+    const dataCriacaoElemento = criarElementoUsuario('Data de Criação', usuario.dataCriacao);
     const permissoesElemento = criarElementoUsuario('Lista de permissões', usuario.listaDePermissoes);
     const ultimaDataLoginElemento = criarElementoUsuario('Ultima data de Login', usuario.ultimaDataLogin);
     const statusAtivacaoElemento = criarElementoUsuario('Status de ativação', usuario.statusAtivacao);
@@ -245,6 +310,7 @@ function criarBlocosUsuarios(dataUsuarios, idElement , botao=null) {
     blocoUsuario.appendChild(nomeElemento);
     blocoUsuario.appendChild(emailElemento);
     blocoUsuario.appendChild(permissoesElemento);
+    blocoUsuario.appendChild(dataCriacaoElemento)
     blocoUsuario.appendChild(ultimaDataLoginElemento);
     blocoUsuario.appendChild(statusAtivacaoElemento);
     

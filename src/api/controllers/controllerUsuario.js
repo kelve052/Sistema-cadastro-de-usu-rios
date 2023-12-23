@@ -22,7 +22,7 @@ const postController = (req, res)=>{
 const putController = (req, res)=>{
   try {
     const id = req.params.id
-    const body = usuario.validarCampos(req.body)
+    const body = usuario.validarCampos(req.body, false)//false porque o usuário já existe, para não ter campos sobrescritos
     usuario.validarSenha(body.senha)
     const hash = usuario.criarHashSenha(body.senha)
     usuario.validarEmail(body.email, id)
@@ -35,7 +35,19 @@ const putController = (req, res)=>{
 
 const deleteController = (req, res)=>{
   try {
-    usuario.deletarUsuario(req.params.id)
+    const usuarioDeletado = usuario.deletarUsuario(req.params.id)
+
+    try {
+      usuario.desativarUsuario(usuarioDeletado)
+    } catch (error) {
+      //ignorar erros pois o usuario a ser deletado pode ou não pode estar ativo
+    }
+    try {
+      usuario.logout(usuarioDeletado)
+    } catch (error) {
+      //ignorar erros pois o usuario a ser deletado pode ou não pode estar logado
+    }
+    
     res.status(201).json()
   } catch (error) {
     res.status(400).json({error: error.message})
@@ -79,4 +91,32 @@ const logout = async (req, res)=>{
     res.status(400).json({error: error.message})
   }
 }
-export { getController, postController, putController, deleteController, getLogins, login, logout};
+
+const postAtivar = async (req, res)=>{
+  try {
+    const {email, senha} = req.body
+    if(!email || !senha){
+      throw new Error(`corpo incorreto! Informe email e senha`);
+    }
+    usuario.verificarEmailInAtivado(email)
+    const usuarioAtivo = await usuario.verificarSenhaHash(email, senha)
+    usuario.ativarUsuario(usuarioAtivo)
+    res.status(200).json({msg: usuarioAtivo})
+  } catch (error) {
+    res.status(400).json({error: error.message})
+  }
+}
+const deleteDesativar = async (req, res)=>{
+  try {
+    const {email, senha} = req.body
+    if(!email || !senha){
+      throw new Error(`corpo incorreto! Informe email e senha`);
+    }
+    const usuarioDesativar = await usuario.verificarSenhaHash(email, senha)
+    usuario.desativarUsuario(usuarioDesativar)
+    res.status(200).json({msg: "usuário desativado com sucesso!"})
+  } catch (error) {
+    res.status(400).json({error: error.message})
+  }
+}
+export { getController, postController, putController, deleteController, getLogins, login, logout, postAtivar, deleteDesativar};

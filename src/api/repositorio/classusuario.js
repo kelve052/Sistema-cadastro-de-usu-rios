@@ -148,7 +148,6 @@ class UsuarioClasse {
 
   verificarEmailInAtivado(email){ // verifica se usuario já esta logado
     const emailAtivo = registroUsuariosAtivo.find(registro => registro.email == email)
-    console.log(emailAtivo)
     if(emailAtivo){
       throw new Error(`O usuario do email: ${email} ja está ativo!`);
     }
@@ -160,22 +159,23 @@ class UsuarioClasse {
     const {email, senha} = usuarioAtivar
     const body = {email, senha}
     registroUsuariosAtivo.push(body)
+    return body
   }
 
-  desativarUsuario(usuarioAtivar){
+  desativarUsuario(usuarioDesativar){
     //frerifica se usuario está ativo
-    const usuarioLogado = registroUsuariosAtivo.find(usuario => usuario.email == usuarioAtivar.email)
+    const usuarioLogado = registroUsuariosAtivo.find(usuario => usuario.email == usuarioDesativar.email)
     if(!usuarioLogado){
       throw new Error('Usuário não está Ativo')
     }
     
-    const indexUsuario = dataBaseUsuarios.findIndex(usuario => usuario.id == usuarioAtivar.id)
+    const indexUsuario = dataBaseUsuarios.findIndex(usuario => usuario.id == usuarioDesativar.id)
     try {
       dataBaseUsuarios[indexUsuario].statusAtivacao = false
     } catch (error) {
       // no caso de usuario for deletado, ignora o erro de não encontrar statusAtivacao
     }
-    const indexRegistrosAtivo = registroUsuariosAtivo.findIndex(registro => registro.email == usuarioAtivar.email)
+    const indexRegistrosAtivo = registroUsuariosAtivo.findIndex(registro => registro.email == usuarioDesativar.email)
     registroUsuariosAtivo.splice(indexRegistrosAtivo, 1)
   }
 }

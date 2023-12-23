@@ -257,6 +257,12 @@ h1{
   font-weight: 400;
   line-height: normal;
 }
+#p_ativado_color{
+  color: #00bf23;
+}
+#p_desativado_color{
+  color: #f0c140;
+}
 
 /* div_informacoes_excluir -----------------------------------------------------------*/
 #div_informacoes_excluir{

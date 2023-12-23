@@ -7,42 +7,42 @@ Este sistema oferece funcionalidades para gerenciamento de usuários, incluindo 
 
 ### Listar Usuários
 - **Método:** GET
-- **URL:** /listarUsuarios
+- **URL:** http://localhost:3000/listarUsuarios
 - **Descrição:** Recupera a lista de usuários cadastrados.
 
 ### Criar Usuário
 - **Método:** POST
-- **URL:** /criarUsuario
+- **URL:** http://localhost:3000/criarUsuario
 - **Descrição:** Cria um novo usuário com base nos dados fornecidos.
 
 ### Atualizar Usuário
 - **Método:** PUT
-- **URL:** /atualizarUsuario/:id
+- **URL:** http://localhost:3000/atualizarUsuario/:id
 - **Descrição:** Atualiza as informações de um usuário específico identificado pelo ID.
 
 ### Deletar Usuário
 - **Método:** DELETE
-- **URL:** /deletarUsuario/:id
+- **URL:** http://localhost:3000/deletarUsuario/:id
 - **Descrição:** Remove um usuário da base de dados com base no ID fornecido.
 
 ### Login
 - **Método:** POST
-- **URL:** /login
+- **URL:** http://localhost:3000/login
 - **Descrição:** Realiza o login do usuário.
 
 ### Logout
 - **Método:** DELETE
-- **URL:** /logout
+- **URL:** http://localhost:3000/logout
 - **Descrição:** Desconecta o usuário.
 
 ### Ativar Usuário
 - **Método:** POST
-- **URL:** /ativar
+- **URL:** http://localhost:3000/ativar
 - **Descrição:** Ativa um usuário.
 
 ### Desativar Usuário
 - **Método:** DELETE
-- **URL:** /desativar
+- **URL:** http://localhost:3000/desativar
 - **Descrição:** Desativa um usuário.
 
 *Observação: Substitua `:id` na URL pelas informações específicas do usuário.*

@@ -304,7 +304,8 @@ function criarBlocosUsuarios(dataUsuarios, idElement , botao=null) {
     const dataCriacaoElemento = criarElementoUsuario('Data de Criação', usuario.dataCriacao);
     const permissoesElemento = criarElementoUsuario('Lista de permissões', usuario.listaDePermissoes);
     const ultimaDataLoginElemento = criarElementoUsuario('Ultima data de Login', usuario.ultimaDataLogin);
-    const statusAtivacaoElemento = criarElementoUsuario('Status de ativação', usuario.statusAtivacao);
+    const statusAtivacaoElemento = criarElementoUsuario('Status de ativação', usuario.statusAtivacao ? 'Ativado' : 'Desativado');
+    statusAtivacaoElemento.id = `${usuario.statusAtivacao? "p_ativado_color":"p_desativado_color"}`
 
     blocoUsuario.appendChild(idElemento);
     blocoUsuario.appendChild(nomeElemento);
